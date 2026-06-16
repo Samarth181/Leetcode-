@@ -3,309 +3,566 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ultimate DSA Tracker</title>
+  <title>DSA Master Sheet</title>
   
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <style>
-    body { margin: 0; background-color: #0d1117; color: #e6edf3; font-family: 'Inter', system-ui, sans-serif; }
-    button { transition: all 0.2s; }
-    button:hover { filter: brightness(1.2); }
+    body {
+      margin: 0;
+      background-color: #0d1117;
+    }
   </style>
 </head>
 <body>
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState, useMemo, useEffect } = React;
+    const { useState, useMemo } = React;
 
-    // ─── UTILITY: Normalize problem names for global syncing ─────────────
-    // "Two Sum" -> "twosum", "Pow(x, n)" -> "powxn"
-    const normalize = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
-
-    // ─── SHEET 1: STRICT BLIND 75 ─────────────────────────────────────────
-    const BLIND_75 = {
-      "Arrays & Hashing": { emoji: "📊", items: [
-        ["Two Sum","E"],["Contains Duplicate","E"],["Valid Anagram","E"],["Group Anagrams","M"],
-        ["Top K Frequent Elements","M"],["Product of Array Except Self","M"],["Encode and Decode Strings","M"],
-        ["Longest Consecutive Sequence","M"]
-      ]},
-      "Two Pointers": { emoji: "🪟", items: [
-        ["Valid Palindrome","E"],["3Sum","M"],["Container With Most Water","M"]
-      ]},
-      "Sliding Window": { emoji: "📦", items: [
-        ["Best Time to Buy and Sell Stock","E"],["Longest Substring Without Repeating Characters","M"],
-        ["Longest Repeating Character Replacement","M"],["Minimum Window Substring","H"]
-      ]},
-      "Stack": { emoji: "📚", items: [
-        ["Valid Parentheses","E"]
-      ]},
-      "Binary Search": { emoji: "🔍", items: [
-        ["Find Minimum in Rotated Sorted Array","M"],["Search in Rotated Sorted Array","M"]
-      ]},
-      "Linked List": { emoji: "🔗", items: [
-        ["Reverse Linked List","E"],["Merge Two Sorted Lists","E"],["Reorder List","M"],
-        ["Remove Nth Node From End of List","M"],["Linked List Cycle","E"],["Merge K Sorted Lists","H"]
-      ]},
-      "Trees": { emoji: "🌳", items: [
-        ["Invert Binary Tree","E"],["Maximum Depth of Binary Tree","E"],["Same Tree","E"],
-        ["Subtree of Another Tree","E"],["Lowest Common Ancestor of a BST","M"],
-        ["Binary Tree Level Order Traversal","M"],["Validate Binary Search Tree","M"],
-        ["Kth Smallest Element in a BST","M"],["Construct Binary Tree from Preorder and Inorder Traversal","M"],
-        ["Binary Tree Maximum Path Sum","H"],["Serialize and Deserialize Binary Tree","H"]
-      ]},
-      "Tries": { emoji: "🌐", items: [
-        ["Implement Trie (Prefix Tree)","M"],["Design Add and Search Words Data Structure","M"],["Word Search II","H"]
-      ]},
-      "Backtracking": { emoji: "🔄", items: [
-        ["Combination Sum","M"],["Word Search","M"]
-      ]},
-      "Graphs": { emoji: "🕸️", items: [
-        ["Number of Islands","M"],["Clone Graph","M"],["Pacific Atlantic Water Flow","M"],
-        ["Course Schedule","M"],["Number of Connected Components in an Undirected Graph","M"],
-        ["Graph Valid Tree","M"],["Alien Dictionary","H"]
-      ]},
-      "1D Dynamic Programming": { emoji: "🧩", items: [
-        ["Climbing Stairs","E"],["House Robber","M"],["House Robber II","M"],
-        ["Longest Palindromic Substring","M"],["Palindromic Substrings","M"],
-        ["Decode Ways","M"],["Coin Change","M"],["Maximum Product Subarray","M"],
-        ["Word Break","M"],["Longest Increasing Subsequence","M"]
-      ]},
-      "2D Dynamic Programming": { emoji: "🎲", items: [
-        ["Unique Paths","M"],["Longest Common Subsequence","M"]
-      ]},
-      "Greedy": { emoji: "💰", items: [
-        ["Maximum Subarray","M"],["Jump Game","M"]
-      ]},
-      "Intervals": { emoji: "⏱️", items: [
-        ["Insert Interval","M"],["Merge Intervals","M"],["Non-overlapping Intervals","M"],["Meeting Rooms","E"],["Meeting Rooms II","M"]
-      ]},
-      "Math & Geometry": { emoji: "📐", items: [
-        ["Rotate Image","M"],["Spiral Matrix","M"],["Set Matrix Zeroes","M"]
-      ]},
-      "Bit Manipulation": { emoji: "⚙️", items: [
-        ["Number of 1 Bits","E"],["Counting Bits","E"],["Reverse Bits","E"],
-        ["Missing Number","E"],["Sum of Two Integers","M"]
-      ]}
-    };
-
-    // ─── SHEET 2: TOP 150 CURATED (Product Companies) ──────────────────────
-    const CURATED_150 = {
+    // ─── SHEET 1: 150 Curated Problems ────────────────────────────────────────
+    const S1 = {
       "Arrays": { emoji: "📊", items: [
-        ["Move Zeros to End","E"],["Remove Duplicates from Sorted Array","E"],["Find Missing Number","E"],
-        ["Two Sum","M"],["Kadane's Algorithm (Max Subarray Sum)","M"],["Majority Element I","M"],
-        ["Next Permutation","M"],["3Sum","M"],["Rotate Image","M"],["Maximum Product Subarray","H"]
+        [1,"Move Zeros to End","E"],[2,"Remove Duplicates from Sorted Array","E"],[3,"Find Missing Number","E"],
+        [4,"Union of Two Sorted Arrays","E"],[5,"Intersection of Two Sorted Arrays","E"],
+        [6,"Two Sum","M"],[7,"Sort an Array of 0's, 1's and 2's","M"],[8,"Kadane's Algorithm (Max Subarray Sum)","M"],
+        [9,"Majority Element I","M"],[10,"Leaders in an Array","M"],[11,"Rearrange Array Elements by Sign","M"],
+        [12,"Next Permutation","M"],[13,"3 Sum","M"],[14,"Rotate Matrix by 90°","M"],[15,"Pascal's Triangle I / II / III","M"],
+        [16,"Majority Element II","H"],[17,"Maximum Product Subarray","H"],[18,"Merge Two Sorted Arrays Without Extra Space","H"],
       ]},
       "Hashing": { emoji: "#️⃣", items: [
-        ["Longest Consecutive Sequence","M"],["Count Subarrays with Given Sum","M"]
+        [19,"Basic Hashing Theory (Fundamentals)","E"],[20,"Longest Consecutive Sequence","M"],
+        [21,"Longest Subarray with Sum K","M"],[22,"Count Subarrays with Given Sum","M"],[23,"Count Subarrays with Given XOR K","M"],
       ]},
       "Binary Search": { emoji: "🔍", items: [
-        ["Search Insert Position","E"],["Search in Rotated Sorted Array","M"],
-        ["Find Minimum in Rotated Sorted Array","M"],["Koko Eating Bananas","M"],
-        ["Aggressive Cows","H"],["Median of Two Sorted Arrays","H"]
+        [24,"Search Insert Position","E"],[25,"Floor and Ceil in Sorted Array","E"],
+        [26,"First and Last Occurrence of Element","E"],[27,"Find Square Root of a Number","E"],
+        [28,"Search in Rotated Sorted Array I","M"],[29,"Find Minimum in Rotated Sorted Array","M"],
+        [30,"Single Element in Sorted Array","M"],[31,"Koko Eating Bananas","M"],[32,"Find Peak Element","M"],
+        [33,"Book Allocation Problem","H"],[34,"Aggressive Cows","H"],[35,"Median of 2 Sorted Arrays","H"],
       ]},
-      "Trees": { emoji: "🌳", items: [
-        ["Maximum Depth of Binary Tree","E"],["Diameter of Binary Tree","E"],
-        ["Lowest Common Ancestor of a BST","M"],["Binary Tree Maximum Path Sum","H"]
+      "Recursion": { emoji: "🔄", items: [
+        [36,"Pow(x, n)","E"],[37,"Power Set","E"],
+        [38,"Generate Parentheses","M"],[39,"Combination Sum","M"],[40,"Subsets I","M"],[41,"Subsets II","M"],
+        [42,"Palindrome Partitioning","H"],[43,"N Queens Problem","H"],
+      ]},
+      "Linked List": { emoji: "🔗", items: [
+        [44,"Reverse a Linked List","E"],[45,"Find Middle of Linked List","E"],[46,"Detect a Loop in Linked List","E"],
+        [47,"Add Two Numbers in LL","M"],[48,"Remove Nth Node from the Back","M"],[49,"Check if LL is Palindrome","M"],
+        [50,"Find Intersection Point of Two LLs","M"],[51,"Find Starting Point of Loop in LL","M"],[52,"Delete the Middle Node","M"],
+        [53,"Reverse LL in Groups of K","H"],[54,"Merge Two Sorted Lists","H"],[55,"Flattening of Linked List","H"],
+      ]},
+      "Bit Manipulation": { emoji: "⚙️", items: [
+        [56,"Single Number I","E"],[57,"Single Number II","M"],[58,"Power Set using Bit Manipulation","M"],[59,"Single Number III","H"],
+      ]},
+      "Greedy": { emoji: "💰", items: [
+        [60,"Assign Cookies","E"],[61,"Jump Game I","E"],
+        [62,"N Meetings in One Room","M"],[63,"Job Sequencing Problem","M"],
+        [64,"Minimum Number of Platforms Required","M"],[65,"Non-overlapping Intervals","M"],
+        [66,"Candy","H"],
+      ]},
+      "Sliding Window / 2 Pointer": { emoji: "🪟", items: [
+        [67,"Maximum Points You Can Obtain from Cards","M"],[68,"Longest Substring Without Repeating Characters","M"],
+        [69,"Longest Repeating Character Replacement","M"],[70,"Fruit Into Baskets","M"],
+        [71,"Subarray Product Less Than K","M"],[72,"Minimum Window Substring","H"],
+      ]},
+      "Stack / Queues": { emoji: "📚", items: [
+        [73,"Balanced Parenthesis","E"],[74,"Implement Min Stack","E"],
+        [75,"Next Greater Element","M"],[76,"Asteroid Collision","M"],
+        [77,"Sum of Subarray Minimums","M"],[78,"Stock Span Problem","M"],[79,"LRU Cache","M"],
+        [80,"Sliding Window Maximum","H"],[81,"Trapping Rainwater","H"],[82,"Largest Rectangle in a Histogram","H"],
+      ]},
+      "Binary Trees": { emoji: "🌳", items: [
+        [83,"Maximum Depth in Binary Tree","E"],[84,"Check if Two Trees are Identical","E"],
+        [85,"Check for Symmetrical Binary Tree","E"],[86,"Diameter of Binary Tree","E"],
+        [87,"Check for Balanced Binary Tree","M"],[88,"Zig-Zag / Spiral Traversal","M"],
+        [89,"Top View of Binary Tree","M"],[90,"Right / Left View of Binary Tree","M"],
+        [91,"LCA in Binary Tree","M"],[92,"Maximum Width of Binary Tree","M"],[93,"Print Root to Leaf Path","M"],
+        [94,"Maximum Path Sum in BT","H"],[95,"Burn the BT from a Given Node","H"],
+        [96,"Serialize and Deserialize Binary Tree","H"],[97,"Vertical Order Traversal of BT","H"],
+      ]},
+      "Binary Search Trees": { emoji: "🔑", items: [
+        [98,"Search in BST","E"],[99,"Floor and Ceil in a BST","E"],
+        [100,"Insert a Node in BST","M"],[101,"Delete a Node in BST","M"],
+        [102,"Kth Smallest and Largest in BST","M"],[103,"Check if a Tree is a BST","M"],[104,"LCA in BST","M"],
+        [105,"Largest BST in Binary Tree","H"],
+      ]},
+      "Heaps": { emoji: "⛰️", items: [
+        [106,"Build Heap / Heapify Algorithm","E"],
+        [107,"Kth Largest Element in an Array","M"],[108,"Kth Largest Element in a Stream","M"],
+        [109,"Merge K Sorted Lists","H"],[110,"Find Median from Data Stream","H"],
+      ]},
+      "Graphs": { emoji: "🕸️", items: [
+        [111,"Number of Provinces (BFS/DFS)","E"],[112,"Number of Islands","E"],[113,"Flood Fill Algorithm","E"],
+        [114,"Rotten Oranges","M"],[115,"Detect Cycle in Undirected Graph","M"],[116,"Bipartite Graph Check","M"],
+        [117,"Topological Sort / Kahn's Algorithm","M"],[118,"Detect Cycle in Directed Graph","M"],
+        [119,"Course Schedule I","M"],[120,"Dijkstra's Algorithm","M"],[121,"Bellman Ford Algorithm","M"],
+        [122,"Word Ladder I","H"],[123,"Accounts Merge (Disjoint Set)","H"],
+        [124,"Bridges in a Graph","H"],[125,"Kosaraju's Algorithm (SCCs)","H"],
       ]},
       "Dynamic Programming": { emoji: "🧩", items: [
-        ["Climbing Stairs","E"],["House Robber","M"],["0/1 Knapsack","M"],
-        ["Longest Common Subsequence","M"],["Edit Distance","H"]
-      ]}
-      // Add the rest of your 150 array here following the ["Name", "Difficulty"] format
-    };
-
-    // ─── SHEET 3: MASTER 223 ─────────────────────────────────────────────
-    const MASTER_223 = {
-      "Arrays Master": { emoji: "📊", items: [
-        ["Two Sum","E"],["Best Time to Buy and Sell Stock","E"],["Move Zeros to End","E"],
-        ["Next Permutation","M"],["Rotate Image","M"],["Spiral Matrix","M"],["Trapping Rain Water","H"]
+        [126,"Climbing Stairs","E"],[127,"House Robber","E"],
+        [128,"Frog Jump","M"],[129,"Grid Unique Paths","M"],[130,"Best Time to Buy and Sell Stock","M"],
+        [131,"Subset Sum Equals to Target","M"],[132,"0/1 Knapsack","M"],[133,"Minimum Coins (Coin Change)","M"],
+        [134,"Longest Increasing Subsequence (LIS)","M"],[135,"Longest Common Subsequence (LCS)","M"],
+        [136,"Edit Distance","M"],[137,"Partition Equal Subset Sum","M"],
+        [138,"Count Subsets with Sum K","M"],[139,"Longest Palindromic Subsequence","M"],
+        [140,"Best Time to Buy and Sell Stock III","H"],[141,"Burst Balloons (MCM)","H"],
+        [142,"Wildcard Matching","H"],[143,"Distinct Subsequences","H"],
       ]},
-      "Binary Search Master": { emoji: "🔍", items: [
-        ["Binary Search","E"],["Search in Rotated Sorted Array","M"],["Koko Eating Bananas","M"],
-        ["Split Array Largest Sum","H"],["Median of Two Sorted Arrays","H"]
-      ]}
-      // Add the rest of your 223 array here
+      "Tries": { emoji: "🌐", items: [
+        [144,"Implement Trie / Introduction to Trie","M"],
+        [145,"Longest Word with All Prefixes","M"],[146,"Maximum XOR of Two Numbers in an Array","M"],
+      ]},
+      "Strings (Advanced)": { emoji: "🔤", items: [
+        [147,"Reverse Every Word in a String","E"],[148,"Minimum Bracket Reversals","M"],
+        [149,"KMP Algorithm / LPS Array","M"],[150,"Shortest Palindrome","H"],
+      ]},
     };
 
-    const DIFF_COLORS = {
-      E: { label:"Easy", c:"#3fb950", bg:"rgba(63,185,80,0.1)", br:"rgba(63,185,80,0.3)" },
-      M: { label:"Medium", c:"#d29922", bg:"rgba(210,153,34,0.1)", br:"rgba(210,153,34,0.3)" },
-      H: { label:"Hard", c:"#f85149", bg:"rgba(248,81,73,0.1)", br:"rgba(248,81,73,0.3)" },
+    // ─── SHEET 2: Blind 75 + Additional LeetCode ──────────────────────────────
+    const S2 = {
+      "Arrays": { emoji: "📊", items: [
+        ["Two Sum","E",true,1],["Contains Duplicate","E",true,217],["Best Time to Buy and Sell Stock","E",true,121],
+        ["Move Zeroes","E",false,283],["Merge Sorted Array","E",false,88],["Majority Element","E",false,169],
+        ["Product of Array Except Self","M",true,238],["Maximum Subarray (Kadane's)","M",true,53],
+        ["Maximum Product Subarray","M",true,152],["Search in Rotated Sorted Array","M",true,33],
+        ["Find Minimum in Rotated Sorted Array","M",true,153],["3Sum","M",true,15],
+        ["Container With Most Water","M",true,11],
+        ["Next Permutation","M",false,31],["Rotate Image (Matrix 90°)","M",false,48],
+        ["Spiral Matrix","M",false,54],["4Sum","M",false,18],["Trapping Rain Water","H",false,42],
+      ]},
+      "Hashing": { emoji: "#️⃣", items: [
+        ["Valid Anagram","E",false,242],["Two Sum","E",false,1],
+        ["Longest Consecutive Sequence","M",true,128],["Group Anagrams","M",false,49],
+        ["Top K Frequent Elements","M",false,347],["Subarray Sum Equals K","M",false,560],
+        ["Encode and Decode TinyURL","M",false,535],
+      ]},
+      "Binary Search": { emoji: "🔍", items: [
+        ["Binary Search","E",false,704],["Search Insert Position","E",false,35],["Sqrt(x)","E",false,69],
+        ["Search in Rotated Sorted Array","M",true,33],["Find Minimum in Rotated Sorted Array","M",true,153],
+        ["Time Based Key-Value Store","M",true,981],
+        ["Find First and Last Position of Element","M",false,34],["Search a 2D Matrix","M",false,74],
+        ["Koko Eating Bananas","M",false,875],["Find Peak Element","M",false,162],
+        ["Search in Rotated Sorted Array II","M",false,81],
+        ["Aggressive Cows (Binary Search on Answer)","H",false,0],
+        ["Split Array Largest Sum","H",false,410],["Median of Two Sorted Arrays","H",true,4],
+      ]},
+      "Recursion": { emoji: "🔄", items: [
+        ["Letter Combinations of Phone Number","M",false,17],["Generate Parentheses","M",false,22],
+        ["Combination Sum","M",true,39],["Combination Sum II","M",false,40],
+        ["Subsets","M",false,78],["Subsets II","M",false,90],["Permutations","M",false,46],
+        ["Palindrome Partitioning","M",false,131],["Word Search","M",true,79],
+        ["N-Queens","H",false,51],["Sudoku Solver","H",false,37],["Rat in a Maze","H",false,0],
+      ]},
+      "Linked List": { emoji: "🔗", items: [
+        ["Reverse Linked List","E",true,206],["Linked List Cycle","E",true,141],
+        ["Palindrome Linked List","E",false,234],["Merge Two Sorted Lists","E",true,21],
+        ["Add Two Numbers","M",false,2],["Remove Nth Node From End of List","M",true,19],
+        ["Find the Duplicate Number","M",false,287],["Reorder List","M",true,143],
+        ["Rotate List","M",false,61],["Sort List","M",false,148],
+        ["Copy List with Random Pointer","M",false,138],
+        ["Merge K Sorted Lists","H",true,23],["Reverse Nodes in k-Group","H",false,25],
+      ]},
+      "Bit Manipulation": { emoji: "⚙️", items: [
+        ["Number of 1 Bits (Hamming Weight)","E",true,191],["Counting Bits","E",true,338],
+        ["Reverse Bits","E",true,190],["Missing Number","E",true,268],
+        ["Single Number","E",false,136],["Power of Two","E",false,231],
+        ["Single Number II","M",false,137],["Single Number III","M",false,260],
+        ["Sum of Two Integers (No + operator)","M",true,371],
+        ["Bitwise AND of Numbers Range","M",false,201],["Maximum XOR of Two Numbers","M",false,421],
+      ]},
+      "Greedy": { emoji: "💰", items: [
+        ["Assign Cookies","E",false,455],
+        ["Jump Game","M",true,55],["Maximum Subarray (Kadane's)","M",true,53],
+        ["Jump Game II","M",false,45],["Gas Station","M",false,134],
+        ["Non-overlapping Intervals","M",false,435],["Insert Interval","M",false,57],
+        ["Meeting Rooms II / Min Platforms","M",false,253],["Task Scheduler","M",false,621],
+        ["Hand of Straights","M",false,846],["Candy","H",false,135],
+      ]},
+      "Sliding Window / 2 Pointer": { emoji: "🪟", items: [
+        ["Maximum Points from Cards","M",false,1423],
+        ["Longest Substring Without Repeating Characters","M",true,3],
+        ["Longest Repeating Character Replacement","M",true,424],
+        ["Fruit Into Baskets","M",false,904],["Permutation in String","M",true,567],
+        ["Max Consecutive Ones III","M",false,1004],["Subarray Product Less Than K","M",false,713],
+        ["Count Nice Subarrays","M",false,1248],["Longest Subarray with Sum K","M",false,0],
+        ["Sliding Window Maximum","H",false,239],["Minimum Window Substring","H",true,76],
+      ]},
+      "Stack / Queues": { emoji: "📚", items: [
+        ["Valid Parentheses","E",true,20],["Implement Queue using Stacks","E",false,232],
+        ["Min Stack","M",true,155],["Evaluate Reverse Polish Notation","M",true,150],
+        ["Generate Parentheses","M",true,22],["Daily Temperatures","M",true,739],
+        ["Car Fleet","M",true,853],["Asteroid Collision","M",false,735],
+        ["Sum of Subarray Minimums","M",false,907],["Next Greater Element","M",false,496],
+        ["LRU Cache","M",false,146],
+        ["Largest Rectangle in Histogram","H",true,84],["Trapping Rain Water","H",false,42],
+        ["Sliding Window Maximum","H",false,239],["LFU Cache","H",false,460],
+      ]},
+      "Binary Trees": { emoji: "🌳", items: [
+        ["Invert Binary Tree","E",true,226],["Maximum Depth of Binary Tree","E",true,104],
+        ["Same Tree","E",true,100],["Subtree of Another Tree","E",true,572],
+        ["Symmetric Tree","E",false,101],["Diameter of Binary Tree","E",false,543],
+        ["Check Balanced Binary Tree","M",false,110],
+        ["Binary Tree Level Order Traversal","M",true,102],
+        ["Count Good Nodes in Binary Tree","M",true,1448],
+        ["Binary Tree Right Side View","M",false,199],
+        ["Lowest Common Ancestor of BT","M",false,236],
+        ["Maximum Width of Binary Tree","M",false,662],
+        ["All Nodes at Distance K in BT","M",false,863],
+        ["Time to Burn / Infect Binary Tree","M",false,2385],
+        ["Construct BT from Preorder and Inorder","M",true,105],
+        ["Flatten Binary Tree to Linked List","M",false,114],
+        ["Lowest Common Ancestor of BST","M",true,235],
+        ["Vertical Order Traversal of BT","H",false,987],
+        ["Binary Tree Maximum Path Sum","H",true,124],
+        ["Serialize and Deserialize Binary Tree","H",true,297],
+      ]},
+      "Binary Search Trees": { emoji: "🔑", items: [
+        ["Convert Sorted Array to BST","E",false,108],["Search in a BST","E",false,700],
+        ["Floor / Ceiling in BST","E",false,0],["Two Sum IV - Input is a BST","E",false,653],
+        ["Insert into a BST","E",false,701],
+        ["Validate Binary Search Tree","M",true,98],["Kth Smallest Element in a BST","M",true,230],
+        ["Delete Node in a BST","M",false,450],["BST Iterator","M",false,173],
+        ["Inorder Successor / Predecessor in BST","M",false,285],
+        ["Lowest Common Ancestor of BST","M",true,235],
+        ["Recover BST (Two Nodes Swapped)","H",false,99],["Largest BST in Binary Tree","H",false,0],
+      ]},
+      "Heaps": { emoji: "⛰️", items: [
+        ["Kth Largest Element in a Stream","E",false,703],
+        ["Kth Largest Element in an Array","M",false,215],["Top K Frequent Elements","M",true,347],
+        ["K Closest Points to Origin","M",true,973],["Task Scheduler","M",true,621],
+        ["Design Twitter","M",true,355],
+        ["IPO (Maximize Capital)","H",false,502],["Maximum Frequency Stack","H",false,895],
+        ["Merge K Sorted Lists","H",true,23],["Find Median from Data Stream","H",true,295],
+      ]},
+      "Graphs": { emoji: "🕸️", items: [
+        ["Flood Fill","E",false,733],
+        ["Number of Islands","M",true,200],["Clone Graph","M",true,133],
+        ["Pacific Atlantic Water Flow","M",true,417],["Course Schedule I","M",true,207],
+        ["Course Schedule II","M",true,210],["Number of Connected Components","M",true,323],
+        ["Graph Valid Tree","M",true,261],["Redundant Connection","M",true,684],
+        ["Surrounded Regions","M",false,130],["Rotten Oranges (BFS)","M",false,994],
+        ["Is Graph Bipartite?","M",false,785],["Find Eventual Safe States","M",false,802],
+        ["Accounts Merge (Disjoint Set Union)","M",false,721],
+        ["Network Delay Time (Dijkstra's)","M",false,743],
+        ["Cheapest Flights Within K Stops","M",false,787],
+        ["Alien Dictionary","H",true,269],["Word Ladder","H",false,127],
+        ["Minimum Spanning Tree (Kruskal/Prim)","H",false,0],
+      ]},
+      "Dynamic Programming": { emoji: "🧩", items: [
+        ["Climbing Stairs","E",true,70],["Minimum Cost Climbing Stairs","E",false,746],
+        ["House Robber","M",true,198],["House Robber II","M",true,213],
+        ["Longest Palindromic Substring","M",true,5],["Palindromic Substrings","M",true,647],
+        ["Decode Ways","M",true,91],["Coin Change","M",true,322],
+        ["Word Break","M",true,139],["Combination Sum IV","M",true,377],
+        ["Unique Paths","M",true,62],["Unique Paths II (with Obstacles)","M",false,63],
+        ["Triangle (Min Path Sum)","M",false,120],["Minimum Falling Path Sum","M",false,931],
+        ["0/1 Knapsack","M",false,0],["Partition Equal Subset Sum","M",true,416],
+        ["Target Sum","M",false,494],["Count Subsets with Sum K","M",false,0],
+        ["Longest Increasing Subsequence","M",true,300],["Longest Common Subsequence","M",true,1143],
+        ["Maximum Product Subarray","M",true,152],
+        ["Best Time Buy/Sell with Cooldown","M",true,309],["Best Time Buy/Sell with Fee","M",true,714],
+        ["Jump Game","M",true,55],
+        ["Edit Distance","H",true,72],["Best Time to Buy and Sell Stock III","H",false,123],
+        ["Best Time to Buy and Sell Stock IV","H",false,188],
+        ["Burst Balloons (MCM)","H",false,312],["Wildcard Matching","H",false,44],
+        ["Distinct Subsequences","H",false,115],
+      ]},
+      "Tries": { emoji: "🌐", items: [
+        ["Implement Trie (Prefix Tree)","M",true,208],["Longest Word with All Prefixes","M",false,0],
+        ["Count Distinct Substrings in String","M",false,0],
+        ["Design Add and Search Words DS","M",true,211],["Maximum XOR of Two Numbers","M",false,421],
+        ["Word Search II","H",true,212],["Maximum XOR with Element from Array","H",false,1707],
+      ]},
+      "Strings (Advanced)": { emoji: "🔤", items: [
+        ["Valid Palindrome","E",true,125],["Valid Anagram","E",false,242],
+        ["Reverse Words in a String","M",false,151],["Longest Palindromic Substring","M",true,5],
+        ["Encode and Decode Strings","M",true,271],["Minimum Bracket Reversals","M",false,0],
+        ["Find Index of First Occurrence (KMP)","M",false,28],
+        ["Rabin-Karp Algorithm","M",false,0],["Z Algorithm","M",false,0],["Group Anagrams","M",false,49],
+        ["Shortest Palindrome","H",false,214],["Minimum Window Substring","H",true,76],
+      ]},
     };
 
-    function App() {
+    const DIFF = {
+      E:{ label:"Easy",  c:"#3fb950", bg:"rgba(63,185,80,0.1)",  br:"rgba(63,185,80,0.3)"  },
+      M:{ label:"Medium",c:"#d29922", bg:"rgba(210,153,34,0.1)", br:"rgba(210,153,34,0.3)" },
+      H:{ label:"Hard",  c:"#f85149", bg:"rgba(248,81,73,0.1)",  br:"rgba(248,81,73,0.3)"  },
+    };
+
+    function DSASheet() {
       const [tab, setTab] = useState(0);
       const [done, setDone] = useState(() => {
-        const saved = localStorage.getItem('dsa_sync_progress');
+        const saved = localStorage.getItem('dsa_progress');
         return saved ? JSON.parse(saved) : {};
       });
+      const [exp, setExp] = useState({});
       const [q, setQ] = useState("");
       const [df, setDf] = useState("all");
-      const [exp, setExp] = useState({});
+      const [b75only, setB75only] = useState(false);
 
-      // Dynamic data selection based on active tab
-      const data = tab === 0 ? BLIND_75 : tab === 1 ? CURATED_150 : MASTER_223;
+      const data = tab === 0 ? S1 : S2;
+      const mk = (topic, i) => `${tab}:${topic}:${i}`;
 
-      // ─── THE SYNC MAGIC: Toggle by Normalized Name ───
-      const toggle = (name) => {
-        const key = normalize(name);
-        const newDone = { ...done, [key]: !done[key] };
+      const toggle = (topic, i) => {
+        const k = mk(topic, i);
+        const newDone = { ...done, [k]: !done[k] };
         setDone(newDone);
-        localStorage.setItem('dsa_sync_progress', JSON.stringify(newDone));
+        localStorage.setItem('dsa_progress', JSON.stringify(newDone));
       };
 
-      // Calculate stats for the CURRENT active tab
       const stats = useMemo(() => {
-        let total=0, solved=0, es=0, ms=0, hs=0;
-        Object.values(data).forEach(({items}) => {
-          items.forEach(([name, diff]) => {
-            total++;
-            if (done[normalize(name)]) {
-              solved++;
-              if (diff === "E") es++;
-              if (diff === "M") ms++;
-              if (diff === "H") hs++;
-            }
+        let total=0,solved=0,es=0,ms=0,hs=0,b75t=0,b75s=0;
+        Object.entries(data).forEach(([topic,{items}]) => {
+          items.forEach((item,i) => {
+            const d = tab===0?item[2]:item[1];
+            const isB = tab===1&&item[2]===true;
+            const isDone = !!done[mk(topic,i)];
+            total++; if(isDone) solved++;
+            if(d==="E"&&isDone) es++;
+            if(d==="M"&&isDone) ms++;
+            if(d==="H"&&isDone) hs++;
+            if(isB){b75t++;if(isDone)b75s++;}
           });
         });
-        return { total, solved, es, ms, hs };
-      }, [data, done]);
+        return {total,solved,es,ms,hs,b75t,b75s};
+      }, [data, done, tab]);
 
-      // Filter logic
       const fdata = useMemo(() => {
-        const dm = { easy: "E", medium: "M", hard: "H" };
+        const dm = {easy:"E",medium:"M",hard:"H"};
         const res = {};
-        Object.entries(data).forEach(([topic, { emoji, items }]) => {
-          const filtered = items.filter(([name, diff]) => {
-            if (q && !name.toLowerCase().includes(q.toLowerCase())) return false;
-            if (df !== "all" && diff !== dm[df]) return false;
+        Object.entries(data).forEach(([topic,{emoji,items}]) => {
+          const filtered = items.map((item,i)=>({item,i})).filter(({item}) => {
+            const name = tab===0?item[1]:item[0];
+            const d = tab===0?item[2]:item[1];
+            const isB = tab===1&&item[2]===true;
+            if(q && !name.toLowerCase().includes(q.toLowerCase())) return false;
+            if(df!=="all" && d!==dm[df]) return false;
+            if(b75only&&tab===1&&!isB) return false;
             return true;
           });
-          if (filtered.length > 0) res[topic] = { emoji, items: filtered };
+          if(filtered.length>0) res[topic]={emoji,filtered};
         });
         return res;
-      }, [data, q, df]);
+      }, [data, q, df, b75only, tab]);
 
-      const pct = stats.total > 0 ? Math.round((stats.solved / stats.total) * 100) : 0;
-      const getTopicSolvedCount = (topic) => data[topic].items.filter(([n]) => done[normalize(n)]).length;
+      const pct = stats.total>0?Math.round(stats.solved/stats.total*100):0;
+      const tSolved = (topic) => data[topic]?.items.filter((_,i)=>done[mk(topic,i)]).length||0;
+      const tTotal  = (topic) => data[topic]?.items.length||0;
+
+      const s1tot = Object.values(S1).reduce((a,t)=>a+t.items.length,0);
+      const s2tot = Object.values(S2).reduce((a,t)=>a+t.items.length,0);
+
+      const expandAll = () => { const o={}; Object.keys(data).forEach(k=>o[k]=true); setExp(o); };
 
       return (
-        <div>
-          {/* HEADER */}
-          <div style={{ background: "#161b22", borderBottom: "1px solid #30363d", padding: "18px 20px 0" }}>
-            <div style={{ maxWidth: 860, margin: "0 auto" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                <span style={{ fontSize: 24 }}>⚡</span>
-                <span style={{ fontWeight: 800, fontSize: 20 }}>Universal DSA Tracker</span>
+        <div style={{fontFamily:"'Inter',system-ui,sans-serif",background:"#0d1117",minHeight:"100vh",color:"#e6edf3"}}>
+          <div style={{background:"#161b22",borderBottom:"1px solid #30363d",padding:"18px 20px 0"}}>
+            <div style={{maxWidth:860,margin:"0 auto"}}>
+              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:3}}>
+                <span style={{fontSize:22}}>⚡</span>
+                <span style={{fontWeight:800,fontSize:19,letterSpacing:"-0.5px"}}>DSA Master Sheet</span>
+                <span style={{fontSize:10,background:"#1f3a6e",color:"#79c0ff",padding:"2px 8px",borderRadius:100,fontWeight:700,letterSpacing:0.6,border:"1px solid #1f6feb"}}>PRODUCT COMPANIES · INDIA</span>
               </div>
-              
-              {/* TABS */}
-              <div style={{ display: "flex", gap: 5, borderTop: "1px solid #21262d", marginTop: 10 }}>
+              <p style={{margin:"0 0 10px",fontSize:12,color:"#8b949e"}}>
+                {tab===0
+                  ? `${s1tot} hand-picked problems · difficulty separated · same topics as your list`
+                  : `Blind 75 mapped to your topics + curated LC additions · ${s2tot} total entries`}
+              </p>
+              <div style={{display:"flex",gap:0,borderTop:"1px solid #21262d",marginTop:2}}>
                 {[
-                  { label: "Blind 75", sub: "The Core Fundamentals", dataObj: BLIND_75 },
-                  { label: "Curated 150", sub: "Product Companies", dataObj: CURATED_150 },
-                  { label: "Master 223", sub: "Complete Supremacy", dataObj: MASTER_223 }
-                ].map((t, i) => (
-                  <button key={i} onClick={() => { setTab(i); setQ(""); setDf("all"); }} style={{
-                    flex: 1, background: "none", border: "none", textAlign: "center", padding: "12px 10px",
-                    borderTop: tab === i ? "2px solid #58a6ff" : "2px solid transparent",
-                    color: tab === i ? "#e6edf3" : "#8b949e", cursor: "pointer"
+                  {label:"Sheet 1 — 150 Curated",sub:"for product companies",count:s1tot},
+                  {label:"Sheet 2 — Blind 75 +",sub:"same topics + additions",count:s2tot}
+                ].map(({label,sub,count},i)=>(
+                  <button key={i} onClick={()=>{setTab(i);setB75only(false);setQ("");setDf("all");}} style={{
+                    background:"none",border:"none",
+                    borderTop:tab===i?"2px solid #58a6ff":"2px solid transparent",
+                    color:tab===i?"#e6edf3":"#8b949e",
+                    padding:"10px 20px",fontSize:13,fontWeight:tab===i?600:400,cursor:"pointer",textAlign:"left"
                   }}>
-                    <div style={{ fontWeight: 600 }}>{t.label}</div>
-                    <div style={{ fontSize: 11, color: "#6e7681", marginTop: 3 }}>{t.sub}</div>
+                    <div style={{fontWeight:600}}>{label} <span style={{fontSize:11,color:"#58a6ff",fontWeight:500}}>({count})</span></div>
+                    <div style={{fontSize:10,color:"#6e7681",marginTop:1}}>{sub}</div>
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          <div style={{ maxWidth: 860, margin: "0 auto", padding: "20px" }}>
-            {/* PROGRESS CARD */}
-            <div style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 12, padding: "20px", marginBottom: 20 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 15 }}>
+          <div style={{maxWidth:860,margin:"0 auto",padding:"18px 20px 80px"}}>
+            <div style={{background:"#161b22",border:"1px solid #30363d",borderRadius:12,padding:"18px 22px",marginBottom:16}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:14}}>
                 <div>
-                  <div style={{ fontSize: 32, fontWeight: 900 }}>{stats.solved} <span style={{ fontSize: 16, color: "#8b949e", fontWeight: 500 }}>/ {stats.total} solved in this list</span></div>
-                  <div style={{ display: "flex", gap: 15, marginTop: 8, fontSize: 13 }}>
-                    <span style={{ color: "#3fb950" }}>● {stats.es} Easy</span>
-                    <span style={{ color: "#d29922" }}>● {stats.ms} Medium</span>
-                    <span style={{ color: "#f85149" }}>● {stats.hs} Hard</span>
+                  <div style={{display:"flex",alignItems:"baseline",gap:5}}>
+                    <span style={{fontSize:34,fontWeight:900,letterSpacing:"-2px",color:"#e6edf3"}}>{stats.solved}</span>
+                    <span style={{fontSize:15,color:"#6e7681",fontWeight:400}}>/ {stats.total} solved</span>
+                  </div>
+                  <div style={{display:"flex",gap:14,marginTop:8,fontSize:12}}>
+                    <span style={{color:"#3fb950",fontWeight:600}}>● {stats.es} Easy</span>
+                    <span style={{color:"#d29922",fontWeight:600}}>● {stats.ms} Medium</span>
+                    <span style={{color:"#f85149",fontWeight:600}}>● {stats.hs} Hard</span>
                   </div>
                 </div>
-                <div style={{ fontSize: 36, fontWeight: 900, color: "#58a6ff" }}>{pct}%</div>
-              </div>
-              <div style={{ height: 8, background: "#30363d", borderRadius: 4, overflow: "hidden" }}>
-                <div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg, #1a4731, #3fb950)", transition: "width 0.4s" }} />
-              </div>
-            </div>
-
-            {/* CONTROLS */}
-            <div style={{ display: "flex", gap: 10, marginBottom: 15 }}>
-              <input value={q} onChange={e => setQ(e.target.value)} placeholder="Search..." 
-                style={{ flex: 1, padding: "10px 15px", background: "#161b22", border: "1px solid #30363d", color: "#fff", borderRadius: 6, outline: "none" }} />
-              
-              {["all", "easy", "medium", "hard"].map(key => (
-                <button key={key} onClick={() => setDf(key)} style={{
-                  background: df === key ? "#1f6feb" : "#161b22", color: "#fff",
-                  border: `1px solid ${df === key ? "#1f6feb" : "#30363d"}`, borderRadius: 6, padding: "0 15px", cursor: "pointer", textTransform: "capitalize"
-                }}>{key}</button>
-              ))}
-            </div>
-
-            {/* PROBLEMS LIST */}
-            {Object.entries(fdata).map(([topic, { emoji, items }]) => {
-              const isOpen = exp[topic] !== false; // Default open
-              const topicTotal = data[topic].items.length;
-              const topicSolved = getTopicSolvedCount(topic);
-              
-              return (
-                <div key={topic} style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 8, marginBottom: 10, overflow: "hidden" }}>
-                  <div onClick={() => setExp({ ...exp, [topic]: !isOpen })}
-                    style={{ padding: "15px", display: "flex", alignItems: "center", cursor: "pointer", background: isOpen ? "#1c2433" : "#161b22" }}>
-                    <span style={{ fontSize: 20, marginRight: 15 }}>{emoji}</span>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 600 }}>{topic}</div>
-                      <div style={{ fontSize: 12, color: "#8b949e", marginTop: 3 }}>{topicSolved} / {topicTotal}</div>
+                <div style={{textAlign:"right"}}>
+                  <div style={{fontSize:30,fontWeight:900,color:"#58a6ff",letterSpacing:"-1px"}}>{pct}%</div>
+                  {tab===1&&(
+                    <div style={{fontSize:11,color:"#8b949e",marginTop:3,display:"flex",alignItems:"center",gap:4,justifyContent:"flex-end"}}>
+                      <span style={{background:"rgba(31,111,235,0.15)",color:"#79c0ff",padding:"1px 7px",borderRadius:100,fontSize:10,fontWeight:700,border:"1px solid rgba(31,111,235,0.3)"}}>B75</span>
+                      <span style={{color:"#58a6ff",fontWeight:600}}>{stats.b75s}/{stats.b75t}</span>
                     </div>
+                  )}
+                </div>
+              </div>
+              <div style={{background:"#30363d",height:8,borderRadius:4,overflow:"hidden"}}>
+                <div style={{height:"100%",width:`${pct}%`,background:"linear-gradient(90deg,#1a4731,#238636,#3fb950)",borderRadius:4,transition:"width 0.5s ease"}} />
+              </div>
+            </div>
+
+            <div style={{display:"flex",gap:8,marginBottom:14,flexWrap:"wrap",alignItems:"center"}}>
+              <div style={{flex:"1 1 160px",position:"relative"}}>
+                <span style={{position:"absolute",left:10,top:"50%",transform:"translateY(-50%)",fontSize:13}}>🔍</span>
+                <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search problems..."
+                  style={{width:"100%",boxSizing:"border-box",background:"#161b22",border:"1px solid #30363d",borderRadius:7,color:"#e6edf3",padding:"8px 12px 8px 30px",fontSize:13,outline:"none"}} />
+              </div>
+              {[
+                {key:"all",  label:"All",   ac:"#1c2d45",cc:"#79c0ff",bc:"#1f6feb"},
+                {key:"easy", label:"Easy",  ac:"#0d2818",cc:"#3fb950",bc:"#3fb950"},
+                {key:"medium",label:"Medium",ac:"#2d1f05",cc:"#d29922",bc:"#d29922"},
+                {key:"hard", label:"Hard",  ac:"#2d0d0d",cc:"#f85149",bc:"#f85149"},
+              ].map(({key,label,ac,cc,bc})=>(
+                <button key={key} onClick={()=>setDf(key)} style={{
+                  background:df===key?ac:"#161b22",border:`1px solid ${df===key?bc:"#30363d"}`,
+                  color:df===key?cc:"#8b949e",borderRadius:7,padding:"7px 13px",
+                  fontSize:12,cursor:"pointer",fontWeight:df===key?700:400,transition:"all 0.15s"
+                }}>{label}</button>
+              ))}
+              {tab===1&&(
+                <button onClick={()=>setB75only(p=>!p)} style={{
+                  background:b75only?"#111d2e":"#161b22",border:`1px solid ${b75only?"#58a6ff":"#30363d"}`,
+                  color:b75only?"#58a6ff":"#8b949e",borderRadius:7,padding:"7px 13px",
+                  fontSize:12,cursor:"pointer",fontWeight:b75only?700:400,transition:"all 0.15s"
+                }}>🎯 Blind 75 Only</button>
+              )}
+              <button onClick={expandAll} style={{background:"#161b22",border:"1px solid #30363d",borderRadius:7,color:"#8b949e",padding:"7px 11px",fontSize:11,cursor:"pointer"}}>↕ Expand All</button>
+              <button onClick={()=>setExp({})} style={{background:"#161b22",border:"1px solid #30363d",borderRadius:7,color:"#8b949e",padding:"7px 11px",fontSize:11,cursor:"pointer"}}>↕ Collapse</button>
+            </div>
+
+            {tab===1&&(
+              <div style={{display:"flex",gap:12,marginBottom:12,fontSize:11,color:"#8b949e",alignItems:"center",padding:"8px 12px",background:"#161b22",borderRadius:7,border:"1px solid #30363d"}}>
+                <span>📋 Legend:</span>
+                <span style={{background:"rgba(31,111,235,0.15)",color:"#79c0ff",padding:"1px 7px",borderRadius:100,fontSize:10,fontWeight:700,border:"1px solid rgba(31,111,235,0.3)"}}>B75</span>
+                <span>= Blind 75 problem</span>
+                <span style={{marginLeft:8,color:"#6e7681"}}>#</span><span>= LeetCode number</span>
+              </div>
+            )}
+
+            {Object.entries(fdata).map(([topic,{emoji,filtered}])=>{
+              const isOpen = !!exp[topic];
+              const ts = tSolved(topic), tt = tTotal(topic);
+              const tp = tt>0?Math.round(ts/tt*100):0;
+              const ec=filtered.filter(({item})=>(tab===0?item[2]:item[1])==="E").length;
+              const mc=filtered.filter(({item})=>(tab===0?item[2]:item[1])==="M").length;
+              const hc=filtered.filter(({item})=>(tab===0?item[2]:item[1])==="H").length;
+
+              return (
+                <div key={topic} style={{background:"#161b22",border:"1px solid #30363d",borderRadius:10,marginBottom:8,overflow:"hidden",transition:"border-color 0.15s"}}>
+                  <div onClick={()=>setExp(p=>({...p,[topic]:!p[topic]}))}
+                    style={{display:"flex",alignItems:"center",padding:"13px 18px",cursor:"pointer",gap:12,
+                      background:isOpen?"#1c2433":"#161b22",transition:"background 0.15s",userSelect:"none"}}>
+                    <span style={{fontSize:18,lineHeight:1}}>{emoji}</span>
+                    <div style={{flex:1,minWidth:0}}>
+                      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:5,flexWrap:"wrap"}}>
+                        <span style={{fontWeight:700,fontSize:14}}>{topic}</span>
+                        <div style={{display:"flex",gap:3}}>
+                          {ec>0&&<span style={{fontSize:9,background:"rgba(63,185,80,0.12)",color:"#3fb950",padding:"2px 6px",borderRadius:100,fontWeight:700,border:"1px solid rgba(63,185,80,0.2)"}}>{ec}E</span>}
+                          {mc>0&&<span style={{fontSize:9,background:"rgba(210,153,34,0.12)",color:"#d29922",padding:"2px 6px",borderRadius:100,fontWeight:700,border:"1px solid rgba(210,153,34,0.2)"}}>{mc}M</span>}
+                          {hc>0&&<span style={{fontSize:9,background:"rgba(248,81,73,0.12)",color:"#f85149",padding:"2px 6px",borderRadius:100,fontWeight:700,border:"1px solid rgba(248,81,73,0.2)"}}>{hc}H</span>}
+                        </div>
+                      </div>
+                      <div style={{display:"flex",alignItems:"center",gap:8}}>
+                        <div style={{width:90,background:"#30363d",height:3,borderRadius:2,overflow:"hidden",flexShrink:0}}>
+                          <div style={{height:"100%",width:`${tp}%`,background:tp===100?"#3fb950":"#1f6feb",borderRadius:2,transition:"width 0.3s"}} />
+                        </div>
+                        <span style={{fontSize:11,color:"#6e7681"}}>{ts}/{tt}</span>
+                        {tp===100&&<span style={{fontSize:10,color:"#3fb950",fontWeight:700}}>✓ Done!</span>}
+                      </div>
+                    </div>
+                    <div style={{color:"#6e7681",fontSize:12,transition:"transform 0.2s",transform:isOpen?"rotate(180deg)":"rotate(0deg)",flexShrink:0}}>▼</div>
                   </div>
 
-                  {isOpen && (
-                    <div>
-                      {items.map(([name, diff], i) => {
-                        const isDone = !!done[normalize(name)];
-                        const dStyle = DIFF_COLORS[diff];
-                        
-                        return (
-                          <div key={i} onClick={() => toggle(name)}
-                            style={{ display: "flex", alignItems: "center", padding: "12px 15px", borderTop: "1px solid #21262d", cursor: "pointer", background: isDone ? "rgba(35,134,54,0.1)" : "transparent" }}>
-                            
-                            {/* Sync Checkbox */}
-                            <div style={{ width: 18, height: 18, borderRadius: 4, border: `2px solid ${isDone ? "#3fb950" : "#30363d"}`, background: isDone ? "#3fb950" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", marginRight: 15 }}>
-                              {isDone && <span style={{ color: "#fff", fontSize: 12, fontWeight: 900 }}>✓</span>}
+                  {isOpen&&(
+                    <div style={{borderTop:"1px solid #21262d"}}>
+                      {(()=>{
+                        const groups = [["E","Easy","#3fb950"],["M","Medium","#d29922"],["H","Hard","#f85149"]];
+                        const elements = [];
+                        groups.forEach(([dKey,dLabel,dColor]) => {
+                          const groupItems = filtered.filter(({item})=>(tab===0?item[2]:item[1])===dKey);
+                          if(groupItems.length===0) return;
+                          elements.push(
+                            <div key={dKey}>
+                              <div style={{padding:"6px 18px 4px",background:"#0d1117",borderBottom:"1px solid #21262d",display:"flex",alignItems:"center",gap:6}}>
+                                <div style={{width:6,height:6,borderRadius:"50%",background:dColor}} />
+                                <span style={{fontSize:11,color:dColor,fontWeight:700,letterSpacing:0.5}}>{dLabel.toUpperCase()}</span>
+                              </div>
+                              {groupItems.map(({item,i})=>{
+                                const name = tab===0?item[1]:item[0];
+                                const isB75 = tab===1&&item[2]===true;
+                                const lcNum = tab===1?item[3]:null;
+                                const isDone = !!done[mk(topic,i)];
+                                const d = DIFF[dKey];
+                                return (
+                                  <div key={i} onClick={()=>toggle(topic,i)}
+                                    style={{display:"flex",alignItems:"center",padding:"9px 18px",cursor:"pointer",gap:10,
+                                      background:isDone?"rgba(35,134,54,0.06)":"transparent",
+                                      borderBottom:"1px solid #21262d",transition:"background 0.1s"}}>
+                                    <div style={{width:16,height:16,borderRadius:4,border:`2px solid ${isDone?"#238636":"#30363d"}`,
+                                      background:isDone?"#238636":"transparent",display:"flex",alignItems:"center",justifyContent:"center",
+                                      flexShrink:0,transition:"all 0.15s"}}>
+                                      {isDone&&<span style={{color:"#fff",fontSize:9,fontWeight:900,lineHeight:1}}>✓</span>}
+                                    </div>
+                                    <span style={{flex:1,fontSize:13,color:isDone?"#6e7681":"#e6edf3",
+                                      textDecoration:isDone?"line-through":"none",lineHeight:1.4,minWidth:0}}>
+                                      {tab===0&&<span style={{color:"#58a6ff",fontSize:11,marginRight:8,fontFamily:"'Courier New',monospace",fontWeight:600}}>#{item[0]}</span>}
+                                      {name}
+                                    </span>
+                                    <div style={{display:"flex",gap:5,alignItems:"center",flexShrink:0}}>
+                                      {isB75&&<span style={{fontSize:9,background:"rgba(31,111,235,0.15)",color:"#79c0ff",padding:"2px 6px",borderRadius:100,fontWeight:700,border:"1px solid rgba(31,111,235,0.35)",letterSpacing:0.4}}>B75</span>}
+                                      {lcNum>0&&<span style={{fontSize:10,color:"#6e7681",fontFamily:"'Courier New',monospace"}}>#{lcNum}</span>}
+                                      <span style={{fontSize:10,background:d.bg,color:d.c,border:`1px solid ${d.br}`,padding:"2px 8px",borderRadius:100,fontWeight:600,minWidth:46,textAlign:"center"}}>
+                                        {d.label}
+                                      </span>
+                                    </div>
+                                  </div>
+                                );
+                              })}
                             </div>
-                            
-                            <span style={{ flex: 1, textDecoration: isDone ? "line-through" : "none", color: isDone ? "#8b949e" : "#e6edf3" }}>{name}</span>
-                            
-                            <span style={{ background: dStyle.bg, color: dStyle.c, border: `1px solid ${dStyle.br}`, padding: "3px 10px", borderRadius: 100, fontSize: 11, fontWeight: 600 }}>
-                              {dStyle.label}
-                            </span>
-                          </div>
-                        );
-                      })}
+                          );
+                        });
+                        return elements;
+                      })()}
                     </div>
                   )}
                 </div>
               );
             })}
+
+            {Object.keys(fdata).length===0&&(
+              <div style={{textAlign:"center",padding:"70px 20px",color:"#8b949e"}}>
+                <div style={{fontSize:42,marginBottom:12}}>🔍</div>
+                <div style={{fontSize:15,fontWeight:600,color:"#e6edf3",marginBottom:6}}>No problems found</div>
+                <div style={{fontSize:13}}>Try adjusting your search query or filters.</div>
+              </div>
+            )}
           </div>
         </div>
       );
     }
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
+    root.render(<DSASheet />);
   </script>
 </body>
 </html>
